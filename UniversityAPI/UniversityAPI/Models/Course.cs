@@ -47,5 +47,22 @@ namespace UniversityAPI.Models
 
         public bool IsActive { get; set; }
         public ICollection<Student> EnrolledStudents { get; set; }
+
+        public Course()
+        {
+            EnrolledStudents = new List<Student>();
+        }
+
+        public void EnrollStudent(Student student)
+        {
+            if (CurrentEnrollment >= MaxCapacity)
+            {
+                throw new InvalidOperationException("Course is at maximum capacity");
+            }
+
+            EnrolledStudents.Add(student);
+            CurrentEnrollment++;
+        }
+
     }
 }

@@ -31,5 +31,20 @@ namespace UniversityAPI.Models
 
         public ICollection<Course> EnrolledCourses { get; set; }
 
+        public Student()
+        {
+            EnrolledCourses = new List<Course>();
+        }
+
+        public void EnrollInCourse(Course course)
+        {
+            if (course == null)
+            {
+                throw new ArgumentNullException(nameof(course));
+            }
+
+            EnrolledCourses.Add(course);
+        }
+
     }
 }
