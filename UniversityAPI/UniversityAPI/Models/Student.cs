@@ -12,7 +12,7 @@ namespace UniversityAPI.Models
         public int Id { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid ExternalId { get; set; }
+        public Guid ExternalStudentlId { get; set; }
         
         [Required]
         [StringLength(50)]
@@ -28,5 +28,8 @@ namespace UniversityAPI.Models
 
         [Required]
         public DateTime DateOfBirth { get; set; }
+
+        public ICollection<Course> EnrolledCourses { get; set; }
+
     }
 }

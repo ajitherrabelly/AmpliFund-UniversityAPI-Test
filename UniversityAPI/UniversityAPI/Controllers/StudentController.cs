@@ -41,7 +41,7 @@ namespace UniversityAPI.Controllers
                 "lastname" => students.OrderBy(s => s.LastName),
                 "email" => students.OrderBy(s => s.Email),
                 "dateofbirth" => students.OrderBy(s => s.DateOfBirth),
-                _ => students.OrderBy(s => s.ExternalId)
+                _ => students.OrderBy(s => s.ExternalStudentlId)
             };
 
             return await students
@@ -50,10 +50,10 @@ namespace UniversityAPI.Controllers
                 .ToListAsync();
         }
 
-        [HttpGet("{externalId}")]
-        public async Task<ActionResult<Student>> GetStudent(Guid externalId)
+        [HttpGet("{externalStudentlId}")]
+        public async Task<ActionResult<Student>> GetStudent(Guid externalStudentlId)
         {
-            var student = await _context.Students.FindAsync(externalId);
+            var student = await _context.Students.FindAsync(externalStudentlId);
 
             if (student == null)
             {
@@ -66,11 +66,11 @@ namespace UniversityAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
-            student.ExternalId = Guid.NewGuid();
+            student.ExternalStudentlId = Guid.NewGuid();
             _context.Students.Add(student);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetStudent), new { externalId = student.ExternalId }, student);
+            return CreatedAtAction(nameof(GetStudent), new { externalStudentId = student.ExternalStudentlId }, student);
         }
 
     }
