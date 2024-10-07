@@ -399,3 +399,6 @@ FodyWeavers.xsd
 
 *.db
 .vs
+
+Migrations/
+
